@@ -1,0 +1,22 @@
+{
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "node": "6.0.0"
+      }
+    }]
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "cwd": "babelrc",
+      "root": ["./src"],
+      "extensions": [
+        ".ts",
+        ".tsx",
+        ".js",
+        ".jsx",
+        ".json"
+      ]
+    }]
+  ]
+}

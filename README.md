@@ -1,3 +1,13 @@
+--
+
+**Notice:** This is a fork of: https://github.com/robertboloc/lolcatjs.
+
+The principal difference between this package and its parent is the removal of the [`sleep`](https://www.npmjs.com/package/sleep) dependency, which requires compiling a C++ module. As such, the animation feature has been removed.
+
+The original `README` continues below.
+
+--
+
 ![lolcatjs](/assets/banner.png)
 
 > For when you need the lols but don't have the rubies.
@@ -6,7 +16,7 @@ This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) g
 
 ## Installation
 ```javascript
-npm install -g lolcatjs
+npm install -g @darkobits/lolcatjs
 ```
 
 ## Usage
@@ -21,8 +31,6 @@ With no FILE, or when FILE is -, read standard input.
     --spread, -p <f>:   Rainbow spread (default: 8.0)
       --freq, -F <f>:   Rainbow frequency (default: 0.3)
       --seed, -S <i>:   Rainbow seed, 0 = random (default: 0)
-       --animate, -a:   Enable psychedelics
-  --duration, -d <i>:   Animation duration (default: 12)
      --speed, -s <f>:   Animation speed (default: 20.0)
          --force, -f:   Force color even when stdout is not a tty
        --version, -v:   Print version and exit
