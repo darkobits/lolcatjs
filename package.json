@@ -15,25 +15,29 @@
   "files": [
     "dist"
   ],
+  "engines": {
+    "node": ">= 6.0.0"
+  },
   "scripts": {
     "clean": "del dist",
     "build": "npm run clean && babel src --out-dir=dist",
     "prebump": "npm run build",
     "bump": "standard-version",
-    "bump:beta": "npm run prebump && standard-version --prerelease=beta"
+    "bump:beta": "npm run prebump && standard-version --prerelease=beta",
+    "link": "npm run build -- --out-dir=$(npx clean-link-dir)/dist --watch"
   },
   "dependencies": {
     "ansi": "^0.3.0",
     "chalk": "^2.1.0",
     "line-by-line": "^0.1.3",
-    "minimist": "^1.1.1",
-    "multiline": "^1.0.2",
-    "supports-color": "^5.0.0"
+    "supports-color": "^5.0.0",
+    "yargs": "^12.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.55",
     "@babel/core": "^7.0.0-beta.55",
     "@babel/preset-env": "^7.0.0-beta.55",
+    "@darkobits/clean-link": "^2.0.1",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "del-cli": "^1.1.0",

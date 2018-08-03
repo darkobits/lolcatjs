@@ -1,91 +1,122 @@
-"use strict";
+import {Writable} from 'stream';
 
-const cursor           = require('ansi')(process.stdout);
-const Reader           = require('line-by-line');
-const chalk            = require('chalk');
+import ansi from 'ansi';
+import chalk from 'chalk';
+import Reader from 'line-by-line';
+
+import {
+  DEFAULT_SPREAD,
+  DEFAULT_FREQ,
+  DEFAULT_SEED,
+  DEFAULT_SPEED
+} from 'etc/constants';
 
 
-let options = {
-    // Seed of the rainbow, use the same for the same pattern
-    seed: 0,
-    // Animation speed
-    speed: 20,
-    // Spread of the rainbow
-    spread: 8.0,
-    // Frequency of the rainbow colors
-    freq: 0.3,
-};
 
-let rainbow = function(freq, i) {
+export default function LolcatJS (input, opts = {}) {
+  let output = '';
 
-    let red   = Math.round(Math.sin(freq * i + 0) * 127 + 128);
-    let green = Math.round(Math.sin(freq * i + 2 * Math.PI / 3) * 127 + 128);
-    let blue  = Math.round(Math.sin(freq * i + 4 * Math.PI / 3) * 127 + 128);
+  // Create a new writable stream that appends to our output string when it is
+  // written to.
+  const stream = new Writable({
+    write(chunk, encoding, callback) {
+      output += chunk.toString('utf8');
+      callback();
+    }
+  });
 
+  // Create a new ansi cursor using our stream.
+  const cursor = ansi(stream);
+
+  // Merge options with defaults.
+  const options = {
+    seed: DEFAULT_SEED,
+    speed: DEFAULT_SPEED,
+    spread: DEFAULT_SPREAD,
+    freq: DEFAULT_FREQ,
+    ...opts
+  };
+
+  function rainbow(freq, i) {
     return {
-        red:   red,
-        green: green,
-        blue:  blue
-    }
-};
+      red: Math.round(Math.sin(freq * i + 0) * 127 + 128),
+      green: Math.round(Math.sin(freq * i + 2 * Math.PI / 3) * 127 + 128),
+      blue: Math.round(Math.sin(freq * i + 4 * Math.PI / 3) * 127 + 128)
+    };
+  }
 
-let colorize = function(char, colors) {
-    process.stdout.write(chalk.rgb(colors.red, colors.green, colors.blue)(char));
-};
+  function colorize(char, colors) {
+    stream.write(chalk.rgb(colors.red, colors.green, colors.blue)(char));
+  }
 
-let printlnPlain = function(colorize, line) {
-
+  function printlnPlain(colorize, line) {
     for (let i = 0; i < line.length; i++) {
-        colorize(line[i], rainbow(options.freq, options.seed + i / options.spread));
+      colorize(line[i], rainbow(options.freq, options.seed + i / options.spread));
     }
-};
+  }
 
-let println = function(line) {
-  cursor.show();
-  printlnPlain(colorize, line);
-  process.stdout.write('\n');
-};
+  function println(line) {
+    cursor.show();
+    printlnPlain(colorize, line);
+    stream.write('\n');
+  }
 
-let fromPipe = function() {
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-    process.stdin.on('data', function(data) {
+  return new Promise((resolve, reject) => {
+    if (options.mode === 'string') {
+      const string = input || '';
+      const lines = string.split('\n');
 
+      lines.forEach(line => {
+        options.seed += 1;
+        println(line);
+        cursor.show();
+      });
+
+      stream.end();
+      resolve(output);
+      return;
+    }
+
+    if (options.mode === 'file') {
+      const fileReader = new Reader(input);
+
+      fileReader.on('line', line => {
+        options.seed += 1;
+        println(line);
+        cursor.show();
+      });
+
+      fileReader.on('end', () => {
+        stream.end();
+        resolve(output);
+      });
+
+      return;
+    }
+
+    if (options.mode === 'pipe') {
+      process.stdin.resume();
+      process.stdin.setEncoding('utf8');
+
+      process.stdin.on('data', data => {
         let lines = data.split('\n');
 
-        for (let line in lines) {
-            options.seed += 1;
-            println(lines[line]);
-        }
-    });
-    return new Promise(resolve => process.stdin.on('end', resolve));
-};
+        lines.forEach(line => {
+          options.seed += 1;
+          println(line);
+        });
+      });
 
-let fromFile = function(file) {
+      process.stdin.on('end', () => {
+        stream.end();
 
-    let fileReader = new Reader(file)
-    fileReader.on('line', function (line) {
-        options.seed += 1;
-        println(line);
-        cursor.show();
-    });
-    return new Promise(resolve => fileReader.on('end', resolve));
-};
+        // Trim trailing newlines.
+        resolve(output.replace(/\n$/g, ''));
+      });
 
-let fromString = function(string) {
+      return;
+    }
 
-    string = string || '';
-    let lines = string.split('\n')
-    lines.forEach(function (line) {
-        options.seed += 1;
-        println(line);
-        cursor.show();
-    });
-};
-
-exports.options  = options;
-exports.println  = println;
-exports.rainbow  = rainbow;
-exports.fromPipe = fromPipe;
-exports.fromFile = fromFile;
-exports.fromString = fromString;
+    reject(new Error(`[lolcatjs] Unknown mode: ${options.mode}`));
+  });
+}

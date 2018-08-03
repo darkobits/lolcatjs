@@ -1,129 +1,78 @@
 #!/usr/bin/env node
 
-"use strict";
+import lolcatjs from 'index';
+import chalk from 'chalk';
+import supportsColor from 'supports-color';
+import yargs from 'yargs';
 
-var lolcatjs  = require('index');
-var info      = require('../../package.json');
-var chalk     = require('chalk');
-var minimist  = require('minimist');
-var multiline = require('multiline');
-var supportsColor = require('supports-color');
+import {
+  DEFAULT_SPREAD,
+  DEFAULT_FREQ,
+  DEFAULT_SEED,
+  DEFAULT_SPEED
+} from 'etc/constants';
 
-var args = minimist(process.argv.slice(2), {
-    alias: {
-        v: 'version',
-        h: 'help',
-        f: 'force',
-        p: 'spread',
-        F: 'freq',
-        S: 'seed',
-        s: 'speed'
-    }
-});
+
+// Parase command-line arguments.
+const argv = yargs
+.usage('$0 <file>')
+.option('force', {
+  alias: 'f',
+  type: 'boolean'
+})
+.option('spread', {
+  alias: 'p',
+  type: 'number',
+  default: DEFAULT_SPREAD
+})
+.option('freq', {
+  alias: 'F',
+  type: 'number',
+  default: DEFAULT_FREQ
+})
+.option('seed', {
+  alias: 'S',
+  type: 'speed',
+  default: DEFAULT_SEED
+})
+.option('speed', {
+  alias: 's',
+  type: 'number',
+  default: DEFAULT_SPEED
+})
+.version()
+.help()
+.argv;
+
 
 function rand(max) {
-    return Math.floor(Math.random() * (max + 1));
+  return Math.floor(Math.random() * (max + 1));
 }
 
-function help() {
-    var help = multiline(function(){/*
 
-Usage: lolcatjs [OPTION]... [FILE]...
+async function init(argv) {
+  if (argv.force) {
+    chalk.enabled = true;
+    chalk.level = supportsColor.supportsColor({isTTY: true}).level;
+  }
 
-Concatenate FILE(s), or standard input, to standard output.
-With no FILE, or when FILE is -, read standard input.
+  const opts = {
+    spread: argv.spread,
+    freq: argv.freq,
+    seed: argv.seed,
+    speed: argv.speed
+  };
 
-    --spread, -p <f>:   Rainbow spread (default: 8.0)
-      --freq, -F <f>:   Rainbow frequency (default: 0.3)
-      --seed, -S <i>:   Rainbow seed, 0 = random (default: 0)
-     --speed, -s <f>:   Animation speed (default: 20.0)
-         --force, -f:   Force color even when stdout is not a tty
-       --version, -v:   Print version and exit
-          --help, -h:   Show this message
+  opts.seed = opts.seed === 0 ? rand(256) : opts.seed;
 
-Examples:
-  lolcatjs f - g     Output f's contents, then stdin, then, g's contents.
-  lolcatjs           Copy standard input to standard output.
-  fortune | lolcatjs Display a rainbow cookie.
-
-Report lolcatjs bugs to <https://github.com/robertboloc/lolcatjs/issues>
-lolcatjs home page: <https://github.com/robertboloc/lolcatjs/>
-Report lolcatjs translation bugs to <http://speaklolcat.com>
-
-    */});
-
-    var i     = 20;
-    var o     = rand(256);
-    var lines = help.split('\n');
-
-    for (var line in lines) {
-        i -= 1;
-        lolcatjs.options.seed = o + i;
-        lolcatjs.println(lines[line]);
-    }
-
-    process.exit();
+  if (argv._.length === 0) {
+    process.stdout.write(await lolcatjs(null, {...opts, mode: 'pipe'}));
+  } else {
+    process.stdout.write(await argv._.reduce(async (outputPromise, curFile) => {
+      return (await outputPromise) + (await lolcatjs(curFile, {...opts, mode: curFile === '-' ? 'pipe' : 'file'}));
+    }, Promise.resolve('')));
+  }
 }
 
-function version() {
 
-    if (lolcatjs.options.seed === 0) {
-        lolcatjs.options.seed = rand(256);
-    }
-
-    lolcatjs.println('lolcatjs ' + info.version + ' (c) 2015 robertboloc@gmail.com');
-
-    process.exit();
-}
-
-function init(args) {
-
-    if (args.force) {
-      chalk.enabled = true;
-      chalk.level = supportsColor.supportsColor({isTTY: true}).level;
-    }
-
-    if (args.help) {
-        help();
-    }
-
-    if (args.version) {
-        version();
-    }
-
-    if (args.spread) {
-        lolcatjs.options.spread = args.spread;
-    }
-
-    if (args.freq) {
-        lolcatjs.options.freq = args.freq;
-    }
-
-    if (args.seed) {
-        lolcatjs.options.seed = args.seed;
-    }
-
-    if (args.speed) {
-        lolcatjs.options.speed = args.speed;
-    }
-
-    if (args._.length === 0) {
-
-        if (lolcatjs.options.seed === 0) {
-            lolcatjs.options.seed = rand(256);
-        }
-
-        lolcatjs.fromPipe();
-    } else {
-        var promise = Promise.resolve();
-        args._.forEach(function(file) {
-            if (file === '-') {
-                promise = promise.then(() => lolcatjs.fromPipe());
-            } else {
-                promise = promise.then(() => lolcatjs.fromFile(file));
-            }
-        });
-    }
-}
-
-init(args);
+init(argv);
