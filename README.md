@@ -1,63 +1,71 @@
---
+<a href="#top" id="top">
+  <img src="https://user-images.githubusercontent.com/441546/46057592-3b63d700-c10b-11e8-92ae-f6db8d11c791.jpg">
+</a>
+<p align="center">
+  <a href="https://www.npmjs.com/package/@darkobits/lolcatjs"><img src="https://img.shields.io/npm/v/@darkobits/lolcatjs.svg?style=flat-square"></a>
+  <a href="https://travis-ci.org/darkobits/lolcatjs"><img src="https://img.shields.io/travis/darkobits/lolcatjs.svg?style=flat-square"></a>
+  <a href="https://github.com/conventional-changelog/standard-version"><img src="https://img.shields.io/badge/conventional%20commits-1.0.0-027dc6.svg?style=flat-square"></a>
+  <a href="https://github.com/sindresorhus/xo"><img src="https://img.shields.io/badge/code_style-XO-e271a5.svg?style=flat-square"></a>
+</p>
 
-**Notice:** This is a fork of: https://github.com/robertboloc/lolcatjs.
+> This is a fork of [`lolcatjs`](https://github.com/robertboloc/lolcatjs), which itself is a Node port of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
 
-The principal difference between this package and its parent is the removal of the [`sleep`](https://www.npmjs.com/package/sleep) dependency, which requires compiling a C++ module. As such, the animation feature has been removed.
+## Notable Differences from [`lolcatjs`](https://github.com/robertboloc/lolcatjs):
 
-The original `README` continues below.
+- The dependency on [`sleep`](https://www.npmjs.com/package/sleep) has been removed. This pakcage was a C++ binding that had to be compiled from source, making the original `lolcatjs` a bit unwieldy.
+- Code has been significantly... refactored.
 
---
+## Install
 
-![lolcatjs](/assets/banner.png)
-
-> For when you need the lols but don't have the rubies.
-
-This is a node port of the famous [lolcat](https://github.com/busyloop/lolcat) gem. It implements all the original functionality and behaviour.
-
-## Installation
-```javascript
+```
 npm install -g @darkobits/lolcatjs
 ```
 
-## Usage
+## Use (CLI)
 
-**Command Line**
-```javascript
-lolcatjs [OPTION]... [FILE]...
+![](https://user-images.githubusercontent.com/441546/46057579-2d15bb00-c10b-11e8-9cb4-d72053db041e.jpg)
 
-Concatenate FILE(s), or standard input, to standard output.
-With no FILE, or when FILE is -, read standard input.
+## Use (Node)
 
-    --spread, -p <f>:   Rainbow spread (default: 8.0)
-      --freq, -F <f>:   Rainbow frequency (default: 0.3)
-      --seed, -S <i>:   Rainbow seed, 0 = random (default: 0)
-     --speed, -s <f>:   Animation speed (default: 20.0)
-         --force, -f:   Force color even when stdout is not a tty
-       --version, -v:   Print version and exit
-          --help, -h:   Show this message
+If you just want to synchronously transform a plain string, use the static `fromString` method on the `Printer` class:
 
-Examples:
-  lolcatjs f - g     Output f's contents, then stdin, then, g's contents.
-  lolcatjs           Copy standard input to standard output.
-  fortune | lolcatjs Display a rainbow cookie.
+```js
+import Printer from '@darkobits/lolcatjs';
+const input = 'The quick brown fox\njumps over the\nlazy dog.';
+const transformed = Printer.fromString(input);
 ```
 
-**NPM Module**
-```javascript
-const lolcatjs = require('lolcatjs');
+If you need to do more exotic things, like transform streams and/or files, you'll want to instantiate a new `Printer`:
 
-lolcatjs.options.seed = Math.round(Math.random() * 1000);
-lolcatjs.options.colors = true;
+```js
+import Printer from '@darkobits/lolcatjs';
 
-lolcatjs.fromString('I can has Cheezburger?');
+// Create a new printer.
+const printer = new Printer();
+
+// The printer can accept input from strings:
+printer.fromString('The quick brown fox jumps over the lazy dog.');
+
+// Or streams (async):
+await printer.fromStream(getReadableStreamSomehow());
+
+// Or files (async):
+await printer.fromFile('/path/to/muh/file.txt');
+
+// (Or all of the above, in any combination.)
+
+// Output can be read by calling toString():
+console.log(printer.toString());
+
+// Or by using the printer in an interpolated string literal:
+console.log(`Output: ${printer}`);
+
+// Or, you can pipe it to a writable stream:
+printer.stream.pipe(process.stdout);
 ```
 
-
-## Screenshot
-![lolcatjs](/assets/screenshot.png)
-
-## Thanks
-[Nur Ortega Marsal](http://esnur.eu) for creating the banner
-
-## License
-WTFPL © [Robert Boloc](http://robertboloc.eu)
+## &nbsp;
+<p align="center">
+  <br>
+  <img width="22" height="22" src="https://cloud.githubusercontent.com/assets/441546/25318539/db2f4cf2-2845-11e7-8e10-ef97d91cd538.png">
+</p>

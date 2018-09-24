@@ -1,0 +1,71 @@
+{
+  "compilerOptions": {
+    // Base directory to resolve non-relative module names.
+    "baseUrl": ".",
+
+    // Redirect output structure to this directory.
+    "outDir": "dist",
+
+    // Specify path mapping to be computed relative to baseUrl option.
+    "paths": {
+      "*": [
+        "*",
+        "src/*"
+      ]
+    },
+
+    // Specify a list of built-in API groups to include in the project.
+    "lib": [
+      "esnext"
+    ],
+
+    // Allow default imports from modules with no default export. This does not
+    // affect code emit, just typechecking.
+    "allowSyntheticDefaultImports": true,
+
+    // Parse in strict mode.
+    "alwaysStrict": true,
+
+    // Emit declaration files.
+    "declaration": true,
+
+    // Emit design-type metadata for decorated declarations in source.
+    "emitDecoratorMetadata": true,
+
+    // Enables experimental support for ES7 decorators.
+    "experimentalDecorators": true,
+
+    // Specify JSX code generation.
+    "jsx": "react",
+
+    // Specify module code generation.
+    "module": "commonjs",
+
+    // Specifies module resolution strategy.
+    "moduleResolution": "node",
+
+    // Warn on expressions and declarations with an implied 'any' type.
+    "noImplicitAny": true,
+
+    // Report errors on unused locals.
+    "noUnusedLocals": true,
+
+    // Stylize errors and messages using color and context.
+    "pretty": true,
+
+    // Do not remove comments from emitted files.
+    "removeComments": false,
+
+    // Skip type checking of declaration files.
+    "skipLibCheck": true,
+
+    // Enable all strict type checking options.
+    "strict": true,
+
+    // Enable strict null checks.
+    "strictNullChecks": true,
+
+    // Specify ECMAScript target version.
+    "target": "es5"
+  }
+}
