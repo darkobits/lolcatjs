@@ -8,6 +8,13 @@
     "type": "git",
     "url": "https://github.com/darkobits/lolcatjs.git"
   },
+  "keywords": [
+    "lol",
+    "cat",
+    "lolcat",
+    "color",
+    "text"
+  ],
   "bin": {
     "lolcatjs": "dist/bin/cli.js"
   },
