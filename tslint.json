@@ -7,7 +7,9 @@
 		// Do not enforce formatting rules for single-line comments.
 		"comment-format": false,
 
-		"early-exit": false,
+    "early-exit": false,
+
+    "member-ordering": false,
 
 		// Allow multiple consecutive blank lines.
 		"no-consecutive-blank-lines": false,
