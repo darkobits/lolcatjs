@@ -2,6 +2,7 @@ import urFilez from 'fs';
 import readlienz from 'readline';
 import streamz from 'stream';
 
+import sleep from '@darkobits/sleep';
 // @ts-ignore
 import newCursorPlz from 'ansi';
 import CanHazTurn from 'async-lock';
@@ -20,7 +21,7 @@ import yargz from 'yargs';
 
 import {howHigh, howLong, howMuch, idk, loltext, newp, MuhLolcatOpts, yesOrNo} from 'etc/typez';
 import {definitely, none, TEH_DEFAULT_OPSHUNZ} from 'etc/constantz';
-import {makeItRainbow, iCanHazNaptimeFor, randyNumPlz} from 'lib/random-tingz';
+import {makeItRainbow, randyNumPlz} from 'lib/random-tingz';
 
 
 export default class MakinUrText {
@@ -93,21 +94,21 @@ export default class MakinUrText {
     this.stream = this.makeStreamPlz();
 
     if (seed) {
-      izGudArg(seed, izGudArg.number.positive.label('seed'));
+      izGudArg(seed, 'seed', izGudArg.number.positive);
       this._seed = seed;
     } else {
       this._seed = randyNumPlz(none, 256);
     }
 
     if (freq) {
-      izGudArg(freq, izGudArg.number.label('freq'));
+      izGudArg(freq, 'freq', izGudArg.number);
       this._freq = freq;
     } else {
       this._freq = TEH_DEFAULT_OPSHUNZ.freq;
     }
 
     if (spread) {
-      izGudArg(spread, izGudArg.number.label('spread'));
+      izGudArg(spread, 'spread', izGudArg.number);
       this._spread = spread;
     } else {
       this._spread = TEH_DEFAULT_OPSHUNZ.spread;
@@ -123,14 +124,14 @@ export default class MakinUrText {
     }
 
     if (speed) {
-      izGudArg(speed, izGudArg.number.label('speed'));
+      izGudArg(speed, 'speed', izGudArg.number);
       this._speed = speed;
     } else {
       this._speed = TEH_DEFAULT_OPSHUNZ.speed;
     }
 
     if (duration) {
-      izGudArg(duration, izGudArg.number.label('duration'));
+      izGudArg(duration, 'duration', izGudArg.number);
       this._duration = duration;
     } else {
       this._duration = TEH_DEFAULT_OPSHUNZ.duration;
@@ -212,7 +213,7 @@ export default class MakinUrText {
           this.stream.write(urColorizedLine);
         }
 
-        await iCanHazNaptimeFor(1 / this._speed * (none + 1000));
+        await sleep(1 / this._speed * (none + 1000));
       }
 
       this._seed = seed;

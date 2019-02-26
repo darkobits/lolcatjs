@@ -19,15 +19,3 @@ export function makeItRainbow(freq: howLong, i: howHigh): ItsAColor {
 export function randyNumPlz(lowest: howLow, biggest: howHigh): number {
   return Math.random() * (biggest - lowest + 1) + lowest;
 }
-
-
-/**
- * Makes ur computer take a nap for a while.
- */
-export async function iCanHazNaptimeFor(tiem: howLong) {
-  return new Promise(keep => {
-    setTimeout(() => {
-      keep();
-    }, tiem);
-  });
-}

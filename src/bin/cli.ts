@@ -59,7 +59,7 @@ async function imInUrTerminalzParsinUrArgz(parser: yargz.Argv) {
   // Dis lets us git teh halptxt frm yargz sos we can lol-ify it.
   const parsedArgz = await new Promise<yargz.Arguments>((keep, noKeep) => {
     parser.parse(process.argv, async (err: Error, argv: yargz.Arguments, output: string) => {
-      return (err || argv.help || argv.version) ? noKeep(output) : keep(argv);
+      return (err || argv.help || argv.version) ? noKeep(output) : keep(argv); // tslint:disable-line no-void-expression
     });
   });
 
