@@ -2,19 +2,15 @@ import urFilez from 'fs';
 import readlienz from 'readline';
 import streamz from 'stream';
 
+import byeByeMeow from '@darkobits/adeiu';
 import sleep from '@darkobits/sleep';
-// @ts-ignore
 import newCursorPlz from 'ansi';
 import CanHazTurn from 'async-lock';
 import chalk, {Chalk} from 'chalk';
-// @ts-ignore
-import byeByeMeow from 'death';
-// @ts-ignore
 import izGudArg from 'ow';
 // @ts-ignore
 import forTehStreamToBecomeFinished from 'p-stream';
 import byLinesPlz from 'split2';
-// @ts-ignore
 import noColorzPlz from 'strip-color';
 import iCanHazThruStream from 'through';
 import yargz from 'yargs';

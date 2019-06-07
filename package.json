@@ -29,23 +29,25 @@
     "prepare": "nps prepare"
   },
   "dependencies": {
-    "@darkobits/sleep": "^1.0.0",
+    "@darkobits/adeiu": "^0.2.2",
+    "@darkobits/sleep": "^1.0.1",
     "ansi": "^0.3.1",
-    "async-lock": "^1.1.4",
+    "async-lock": "^1.2.0",
     "chalk": "^2.4.2",
-    "death": "^1.1.0",
-    "ow": "^0.12.0",
+    "ow": "^0.13.2",
     "p-stream": "^1.0.3",
-    "split2": "^3.1.0",
+    "split2": "^3.1.1",
     "strip-color": "^0.1.0",
     "through": "^2.3.8",
-    "yargs": "^13.2.1"
+    "yargs": "^13.2.4"
   },
   "devDependencies": {
-    "@darkobits/ts-unified": "~1.1.3",
+    "@darkobits/ts-unified": "^1.6.0",
+    "@types/ansi": "^0.3.2",
     "@types/async-lock": "^1.1.1",
     "@types/split2": "^2.1.6",
+    "@types/strip-color": "^0.1.0",
     "@types/through": "0.0.29",
-    "@types/yargs": "^12.0.9"
+    "@types/yargs": "^13.0.0"
   }
 }
