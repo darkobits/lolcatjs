@@ -48,6 +48,6 @@
     "@types/split2": "^2.1.6",
     "@types/strip-color": "^0.1.0",
     "@types/through": "0.0.29",
-    "@types/yargs": "^13.0.0"
+    "@types/yargs": "^15.0.4"
   }
 }
