@@ -23,31 +23,32 @@
     "dist"
   ],
   "scripts": {
-    "build": "nps build",
-    "test": "nps test",
-    "bump": "nps bump",
-    "prepare": "nps prepare"
+    "prepare": "nr prepare"
   },
   "dependencies": {
-    "@darkobits/adeiu": "^0.2.2",
+    "@darkobits/adeiu": "^0.2.14",
+    "@darkobits/saffron": "^0.4.2",
     "@darkobits/sleep": "^1.0.1",
     "ansi": "^0.3.1",
     "async-lock": "^1.2.0",
-    "chalk": "^2.4.2",
-    "ow": "^0.13.2",
+    "chalk": "^4.1.2",
+    "fs-extra": "^10.0.0",
+    "ow": "^0.27.0",
+    "p-each-series": "^2.2.0",
     "p-stream": "^1.0.3",
     "split2": "^3.1.1",
     "strip-color": "^0.1.0",
     "through": "^2.3.8",
-    "yargs": "^13.2.4"
+    "yargs": "^17.1.0"
   },
   "devDependencies": {
-    "@darkobits/ts-unified": "^1.6.0",
+    "@darkobits/ts": "^0.7.11",
     "@types/ansi": "^0.3.2",
-    "@types/async-lock": "^1.1.1",
-    "@types/split2": "^2.1.6",
+    "@types/async-lock": "^1.1.3",
+    "@types/fs-extra": "^9.0.12",
+    "@types/split2": "^3.2.1",
     "@types/strip-color": "^0.1.0",
-    "@types/through": "0.0.29",
-    "@types/yargs": "^13.0.0"
+    "@types/through": "0.0.30",
+    "@types/yargs": "^17.0.2"
   }
 }

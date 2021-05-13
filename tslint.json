@@ -1,6 +1,0 @@
-{
-	"extends": "@darkobits/ts-unified/dist/config/tslint.json",
-	"rules": {
-		"no-unnecessary-type-annotation": false
-	}
-}

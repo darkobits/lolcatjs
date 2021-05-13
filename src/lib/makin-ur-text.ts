@@ -1,4 +1,4 @@
-import urFilez from 'fs';
+import { EOL } from 'os';
 import readlienz from 'readline';
 import streamz from 'stream';
 
@@ -6,18 +6,20 @@ import byeByeMeow from '@darkobits/adeiu';
 import sleep from '@darkobits/sleep';
 import newCursorPlz from 'ansi';
 import CanHazTurn from 'async-lock';
-import chalk, {Chalk} from 'chalk';
+import chalk, { Chalk } from 'chalk';
 import izGudArg from 'ow';
+import pEechSeriez from 'p-each-series';
 // @ts-ignore
 import forTehStreamToBecomeFinished from 'p-stream';
+import urFilez from 'fs-extra';
 import byLinesPlz from 'split2';
 import noColorzPlz from 'strip-color';
 import iCanHazThruStream from 'through';
 import yargz from 'yargs';
 
 import {howHigh, howLong, howMuch, idk, loltext, newp, MuhLolcatOpts, yesOrNo} from 'etc/typez';
-import {definitely, none, TEH_DEFAULT_OPSHUNZ} from 'etc/constantz';
-import {makeItRainbow, randyNumPlz} from 'lib/random-tingz';
+import { none, TEH_DEFAULT_OPSHUNZ } from 'etc/constantz';
+import { makeItRainbow, randyNumPlz } from 'lib/random-tingz';
 
 
 export default class MakinUrText {
@@ -115,6 +117,7 @@ export default class MakinUrText {
     if (this._animate) {
       byeByeMeow(() => {
         this.yesCursor();
+        // eslint-disable-next-line unicorn/no-process-exit
         process.exit(none);
       });
     }
@@ -133,9 +136,8 @@ export default class MakinUrText {
       this._duration = TEH_DEFAULT_OPSHUNZ.duration;
     }
 
-    this._muhChalk = new chalk.constructor(force ? {
-      enabled: definitely,
-      level: none + 2
+    this._muhChalk = new chalk.Instance(force ? {
+      level: 2
     } : undefined);
   }
 
@@ -148,7 +150,7 @@ export default class MakinUrText {
       this.emit('data', data);
     }
 
-    const pipe = (wrappedPipe: Function) => {
+    const pipe = (wrappedPipe: any) => {
       return (destStream: idk, opts?: idk) => {
         this._cursorz.push(newCursorPlz(destStream));
         return wrappedPipe(destStream, opts);
@@ -205,6 +207,7 @@ export default class MakinUrText {
         this._seed += this._spread;
 
         if (i % 2 === none) {
+          // eslint-disable-next-line unicorn/prefer-string-slice
           const urColorizedLine = this.colorizeUrLine(urLine.substr(none, yargz.terminalWidth()));
           this.stream.write(urColorizedLine);
         }
@@ -230,7 +233,7 @@ export default class MakinUrText {
       await this.animateUrLine(line);
     }
 
-    const colorizedLine = this.colorizeUrLine(line) + '\n';
+    const colorizedLine = `${this.colorizeUrLine(line)}\n`;
     this._loltext += colorizedLine;
     this.stream.write(colorizedLine);
   }
@@ -240,6 +243,7 @@ export default class MakinUrText {
    * Lets u lol ur strings.
    */
   fromString(urString = '') {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     urString.split('\n').forEach(async (urLien: string) => {
       await this.makeLine(urLien);
     });
@@ -250,6 +254,7 @@ export default class MakinUrText {
    * Lets u lol ur streams.
    */
   async fromStream(urStream: streamz.Readable): Promise<newp> {
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     return new Promise<newp>(async (keep, noKeep) => {
       const urStreamWasTakingTooLong = setTimeout(() => {
         noKeep(new Error('Stream timeout; did not receive any data.'));
@@ -258,6 +263,7 @@ export default class MakinUrText {
       urStream.resume();
       urStream.setEncoding('utf8');
 
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
       urStream.pipe(byLinesPlz()).on('data', async tehLine => {
         clearTimeout(urStreamWasTakingTooLong);
         await this.makeLine(tehLine);
@@ -273,14 +279,8 @@ export default class MakinUrText {
    * Lets u lol ur filez.
    */
   async fromFile(urFile: idk): Promise<newp> {
-    const theFileStream = urFilez.createReadStream(urFile).pipe(byLinesPlz());
-    theFileStream.setEncoding('utf8');
-
-    theFileStream.on('data', async tehLine => {
-      await this.makeLine(tehLine);
-    });
-
-    await forTehStreamToBecomeFinished(theFileStream);
+    const urLinez = (await urFilez.readFile(urFile, 'utf8')).split(EOL);
+    await pEechSeriez(urLinez, async disLine => this.makeLine(disLine));
   }
 
 
@@ -298,10 +298,10 @@ export default class MakinUrText {
   static fromString(urString: string, urOpshunz?: MuhLolcatOpts): string {
     const urLoltext = new MakinUrText(urOpshunz);
 
-    urString.split('\n').forEach((line: string) => {
+    urString.split(EOL).forEach((line: string) => {
       urLoltext._seed += 0.33;
 
-      const colorizedLine = urLoltext.colorizeUrLine(line) + '\n';
+      const colorizedLine = `${urLoltext.colorizeUrLine(line)}\n`;
       urLoltext._loltext += colorizedLine;
       urLoltext.stream.write(colorizedLine);
     });
