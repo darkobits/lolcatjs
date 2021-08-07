@@ -56,6 +56,7 @@ cli.command<TehArgumentz>({
 
     command.option('animate', {
       description: 'Enable psychedelics.',
+      type: 'boolean',
       alias: 'a',
       default: TEH_DEFAULT_OPSHUNZ.animate
     });
@@ -85,6 +86,10 @@ cli.command<TehArgumentz>({
   handler: async ({ argv }) => {
     const urLoltext = new MakinUrText({...TEH_DEFAULT_OPSHUNZ, ...argv});
     urLoltext.stream.pipe(process.stdout);
+
+    if (argv.filez.length === 0) {
+      argv.filez.push('-');
+    }
 
     await pEechSeriez(argv.filez, async urArg => {
       return urArg === '-'
