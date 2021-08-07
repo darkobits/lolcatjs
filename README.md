@@ -1,21 +1,15 @@
 <a href="#top" id="top">
-  <img src="https://user-images.githubusercontent.com/441546/46057592-3b63d700-c10b-11e8-92ae-f6db8d11c791.jpg">
+  <img src="https://user-images.githubusercontent.com/441546/128600690-29ef818e-dd09-4a83-b7e3-2d0c9f6513ca.png">
 </a>
 <p align="center">
   <a href="https://www.npmjs.com/package/@darkobits/lolcatjs"><img src="https://img.shields.io/npm/v/@darkobits/lolcatjs.svg?style=flat-square"></a>
-  <a href="https://github.com/darkobits/lolcatjs/actions?query=workflow%3ACI"><img src="https://img.shields.io/github/workflow/status/darkobits/lolcatjs/CI/master?style=flat-square"></a>
-  <a href="https://app.codecov.io/gh/darkobits/lolcatjs/branch/master"><img src="https://img.shields.io/codecov/c/github/darkobits/lolcatjs/master?style=flat-square"></a>
+  <a href="https://github.com/darkobits/lolcatjs/actions?query=workflow%3Aci"><img src="https://img.shields.io/github/workflow/status/darkobits/lolcatjs/ci/master?style=flat-square"></a>
   <a href="https://depfu.com/github/darkobits/lolcatjs"><img src="https://img.shields.io/depfu/darkobits/lolcatjs?style=flat-square"></a>
   <a href="https://bundlephobia.com/package/@darkobits/lolcatjs"><img src="https://img.shields.io/bundlephobia/minzip/@darkobits/lolcatjs?label=size&style=flat-square"></a>
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/static/v1?label=commits&message=conventional&style=flat-square&color=398AFB"></a>
 </p>
 
 > This is a fork of [`lolcatjs`](https://github.com/robertboloc/lolcatjs), which itself is a Node port of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
-
-## Notable Differences from [`lolcatjs`](https://github.com/robertboloc/lolcatjs):
-
-- The dependency on [`sleep`](https://www.npmjs.com/package/sleep) has been removed. This pakcage was a C++ binding that had to be compiled from source, making the original `lolcatjs` a bit unwieldy.
-- Code has been significantly... refactored.
 
 ## Install
 

@@ -1,4 +1,4 @@
-name: CI/CD
+name: ci
 on:
   - push
   - pull_request
@@ -35,9 +35,3 @@ jobs:
 
       - name: Build Project
         run: npx nr build
-
-      - name: Run Unit Tests
-        run: npx nr test.coverage
-
-      - name: Upload Coverage Report
-        run: bash <(curl -s https://codecov.io/bash)
