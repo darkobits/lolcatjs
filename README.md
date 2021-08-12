@@ -5,7 +5,6 @@
   <a href="https://www.npmjs.com/package/@darkobits/lolcatjs"><img src="https://img.shields.io/npm/v/@darkobits/lolcatjs.svg?style=flat-square"></a>
   <a href="https://github.com/darkobits/lolcatjs/actions?query=workflow%3Aci"><img src="https://img.shields.io/github/workflow/status/darkobits/lolcatjs/ci/master?style=flat-square"></a>
   <a href="https://depfu.com/github/darkobits/lolcatjs"><img src="https://img.shields.io/depfu/darkobits/lolcatjs?style=flat-square"></a>
-  <a href="https://bundlephobia.com/package/@darkobits/lolcatjs"><img src="https://img.shields.io/bundlephobia/minzip/@darkobits/lolcatjs?label=size&style=flat-square"></a>
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/static/v1?label=commits&message=conventional&style=flat-square&color=398AFB"></a>
 </p>
 
@@ -14,7 +13,7 @@
 ## Install
 
 ```
-npm install -g @darkobits/lolcatjs
+npm install --global @darkobits/lolcatjs
 ```
 
 ## Use (CLI)
@@ -23,7 +22,8 @@ npm install -g @darkobits/lolcatjs
 
 ## Use (Node)
 
-If you just want to synchronously transform a plain string, use the static `fromString` method on the `Printer` class:
+If you just want to synchronously transform a plain string, use the static `fromString` method on the
+`Printer` class:
 
 ```js
 import Printer from '@darkobits/lolcatjs';
@@ -31,7 +31,8 @@ const input = 'The quick brown fox\njumps over the\nlazy dog.';
 const transformed = Printer.fromString(input);
 ```
 
-If you need to do more exotic things, like transform streams and/or files, you'll want to instantiate a new `Printer`:
+If you need to do more exotic things, like transform streams and/or files, you'll want to instantiate a
+new `Printer`:
 
 ```js
 import Printer from '@darkobits/lolcatjs';
