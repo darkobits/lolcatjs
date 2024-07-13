@@ -1,3 +1,3 @@
-import { nr } from '@darkobits/ts';
+import { defaultPackageScripts } from '@darkobits/ts';
 
-export default nr();
+export default defaultPackageScripts;

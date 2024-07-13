@@ -6,28 +6,27 @@ import byeByeMeow from '@darkobits/adeiu';
 import sleep from '@darkobits/sleep';
 import newCursorPlz from 'ansi';
 import CanHazTurn from 'async-lock';
-import chalk, { Chalk } from 'chalk';
+import { Chalk, type ChalkInstance } from 'chalk';
+import urFilez from 'fs-extra';
 import izGudArg from 'ow';
 import pEechSeriez from 'p-each-series';
 // @ts-ignore
 import forTehStreamToBecomeFinished from 'p-stream';
-import urFilez from 'fs-extra';
 import byLinesPlz from 'split2';
 import noColorzPlz from 'strip-color';
 import iCanHazThruStream from 'through';
 import yargz from 'yargs';
 
-import {howHigh, howLong, howMuch, idk, loltext, newp, MuhLolcatOpts, yesOrNo} from 'etc/typez';
 import { none, TEH_DEFAULT_OPSHUNZ } from 'etc/constantz';
+import {howHigh, howLong, howMuch, idk, loltext, newp, MuhLolcatOpts, yesOrNo} from 'etc/typez';
 import { makeItRainbow, randyNumPlz } from 'lib/random-tingz';
-
 
 export default class MakinUrText {
   /**
    * It's not nice to tamper with globals so we make a speshul chalk just for
    * us.
    */
-  private readonly _muhChalk: Chalk;
+  private readonly _muhChalk: ChalkInstance;
 
   /**
    * Cursors for teh streams we get piped to.
@@ -136,7 +135,7 @@ export default class MakinUrText {
       this._duration = TEH_DEFAULT_OPSHUNZ.duration;
     }
 
-    this._muhChalk = new chalk.Instance(force ? {
+    this._muhChalk = new Chalk(force ? {
       level: 2
     } : undefined);
   }
@@ -187,7 +186,7 @@ export default class MakinUrText {
    * Turns text into -----> !loltext!.
    */
   private colorizeUrLine(line: string): loltext {
-    return noColorzPlz(line).split('').map((char: idk, index: howHigh) => {
+    return [...noColorzPlz(line)].map((char: idk, index: howHigh) => {
       const {red, green, blue} = makeItRainbow(this._freq, this._seed + index / this._spread);
       return this._muhChalk.rgb(red, green, blue)(char);
     }).join('');
@@ -201,14 +200,14 @@ export default class MakinUrText {
     return this._wait4Turn.acquire('meow', async () => {
       const seed = this._seed;
 
-      for (let i = 1; i < this._duration; i++) {
+      for (let i = 1; i < this._duration; i += 1) {
         this.noCursor();
         readlienz.cursorTo(this.stream, none);
         this._seed += this._spread;
 
         if (i % 2 === none) {
           // eslint-disable-next-line unicorn/prefer-string-slice
-          const urColorizedLine = this.colorizeUrLine(urLine.substr(none, yargz.terminalWidth()));
+          const urColorizedLine = this.colorizeUrLine(urLine.substr(none, yargz().terminalWidth()));
           this.stream.write(urColorizedLine);
         }
 

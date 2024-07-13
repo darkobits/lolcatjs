@@ -1,5 +1,5 @@
 module.exports = {
-  extends: require('@darkobits/ts').eslint,
+  extends: 'plugin:@darkobits/ts',
   rules: {
     '@typescript-eslint/naming-convention': 'off',
     'no-console': 'off',
