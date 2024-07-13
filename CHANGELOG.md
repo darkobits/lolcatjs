@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.0](https://github.com/darkobits/lolcatjs/compare/v3.1.5...v4.0.0) (2024-07-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** This package is now pure ESM. For more information, see:
+
+https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+
+### 🏗 Chores
+
+* **deps:** Update dependencies. ([d6a2205](https://github.com/darkobits/lolcatjs/commit/d6a220543e3b47670e1bdfd3a9c6ec798fee4194))
+* **deps:** Update dependencies. ([fd16c01](https://github.com/darkobits/lolcatjs/commit/fd16c01a918c16a9d82f0b694182f2f2cd83f98a))
+
+
+### 📖 Documentation
+
+* Update README. ([92da302](https://github.com/darkobits/lolcatjs/commit/92da30281443d1a9e2fe6608be38946937ef345c))
+
 ### [3.1.5](https://github.com/darkobits/lolcatjs/compare/v3.1.4...v3.1.5) (2021-08-07)
 
 
