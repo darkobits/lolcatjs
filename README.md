@@ -8,7 +8,7 @@
   <a href="https://conventionalcommits.org"><img src="https://img.shields.io/static/v1?label=commits&message=conventional&style=flat-square&color=398AFB"></a>
 </p>
 
-> This is a fork of [`lolcatjs`](https://github.com/robertboloc/lolcatjs), which itself is a Node port of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
+> This is a fork of [`lolcatjs`](https://github.com/robertmarsal/lolcatjs), which itself is a Node port of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
 
 ## Install
 
