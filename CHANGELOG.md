@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.1](https://github.com/darkobits/lolcatjs/compare/v4.0.0...v4.0.1) (2024-07-15)
+
+
+### 🏗 Chores
+
+* **deps:** Update dependencies. ([c1b570a](https://github.com/darkobits/lolcatjs/commit/c1b570a6a45aa7116c32f56139cbbe9c1876a31b))
+* Update CI workflow. ([ac8f0e7](https://github.com/darkobits/lolcatjs/commit/ac8f0e7898b04168a60413387c0d49ea88964b40))
+* Update documentation. ([f67a438](https://github.com/darkobits/lolcatjs/commit/f67a438d790b72510d91e8cfe055a308df56a98c))
+
+
+### 📖 Documentation
+
+* Update README. ([6813270](https://github.com/darkobits/lolcatjs/commit/6813270ffe7cb79ba8df29925cb6dbfbe6be9c36))
+* Update README. ([971a540](https://github.com/darkobits/lolcatjs/commit/971a5402a488d2849fe54941cbfd6624faeb5d4a))
+
 ## [4.0.0](https://github.com/darkobits/lolcatjs/compare/v3.1.5...v4.0.0) (2024-07-13)
 
 
