@@ -1,14 +1,36 @@
-<a href="#top" id="top">
-  <img src="https://user-images.githubusercontent.com/441546/128600690-29ef818e-dd09-4a83-b7e3-2d0c9f6513ca.png">
-</a>
 <p align="center">
-  <a href="https://www.npmjs.com/package/@darkobits/lolcatjs"><img src="https://img.shields.io/npm/v/@darkobits/lolcatjs.svg?style=flat-square"></a>
-  <a href="https://github.com/darkobits/lolcatjs/actions?query=workflow%3Aci"><img src="https://img.shields.io/github/workflow/status/darkobits/lolcatjs/ci/master?style=flat-square"></a>
-  <a href="https://depfu.com/github/darkobits/lolcatjs"><img src="https://img.shields.io/depfu/darkobits/lolcatjs?style=flat-square"></a>
-  <a href="https://conventionalcommits.org"><img src="https://img.shields.io/static/v1?label=commits&message=conventional&style=flat-square&color=398AFB"></a>
+  <img src="https://user-images.githubusercontent.com/441546/128600690-29ef818e-dd09-4a83-b7e3-2d0c9f6513ca.png">
+</p>
+<p align="center">
+  <a
+    href="https://www.npmjs.com/package/@darkobits/lolcatjs"
+  ><img
+    src="https://img.shields.io/npm/v/@darkobits/lolcatjs.svg?style=flat-square"
+  ></a>
+  <a
+    href="https://github.com/darkobits/lolcatjs/actions?query=workflow%3Aci"
+  ><img
+    src="https://img.shields.io/github/actions/workflow/status/darkobits/lolcatjs/ci.yml?style=flat-square"
+  ></a>
+  <a
+    href="https://depfu.com/repos/github/darkobits/lolcatjs"
+  ><img
+    src="https://img.shields.io/depfu/darkobits/lolcatjs?style=flat-square"
+  ></a>
+  <a
+    href="https://conventionalcommits.org"
+  ><img
+    src="https://img.shields.io/static/v1?label=commits&message=conventional&style=flat-square&color=398AFB"
+  ></a>
+  <a
+    href="https://firstdonoharm.dev"
+  ><img
+    src="https://img.shields.io/static/v1?label=license&message=hippocratic&style=flat-square&color=753065"
+  ></a>
 </p>
 
-> This is a fork of [`lolcatjs`](https://github.com/robertmarsal/lolcatjs), which itself is a Node port of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
+> This is a fork of [`lolcatjs`](https://github.com/robertmarsal/lolcatjs), which itself is a Node port
+of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
 
 ## Install
 
@@ -61,7 +83,6 @@ console.log(`Output: ${printer}`);
 printer.stream.pipe(process.stdout);
 ```
 
-## &nbsp;
 <p align="center">
   <br>
   <img width="22" height="22" src="https://cloud.githubusercontent.com/assets/441546/25318539/db2f4cf2-2845-11e7-8e10-ef97d91cd538.png">
