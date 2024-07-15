@@ -1,7 +1,4 @@
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/441546/128600690-29ef818e-dd09-4a83-b7e3-2d0c9f6513ca.png">
-</p>
-<p align="center">
   <a
     href="https://www.npmjs.com/package/@darkobits/lolcatjs"
   ><img
@@ -27,6 +24,9 @@
   ><img
     src="https://img.shields.io/static/v1?label=license&message=hippocratic&style=flat-square&color=753065"
   ></a>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/441546/128600690-29ef818e-dd09-4a83-b7e3-2d0c9f6513ca.png">
 </p>
 
 > This is a fork of [`lolcatjs`](https://github.com/robertmarsal/lolcatjs), which itself is a Node port
