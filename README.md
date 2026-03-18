@@ -29,6 +29,10 @@
   <img src="https://user-images.githubusercontent.com/441546/128600690-29ef818e-dd09-4a83-b7e3-2d0c9f6513ca.png">
 </p>
 
+> [!WARNING]
+> Consult [`AGELESS.md`](./AGELESS.md) to determine if you are permitted to use
+> this software where you live.
+
 > This is a fork of [`lolcatjs`](https://github.com/robertmarsal/lolcatjs), which itself is a Node port
 of the [`lolcat`](https://github.com/busyloop/lolcat) Ruby gem.
 
